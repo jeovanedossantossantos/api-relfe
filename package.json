@@ -1,12 +1,13 @@
 {
   "name": "api-relf",
   "version": "1.0.1",
-  "main": "index.js",
+  "main": "app.js",
   "repository": "https://github.com/jeovanedossantossantos/api-relfe.git",
   "author": "Jeovane dos Santos Santos <jeovane.ssantos@outlook.com>",
   "license": "MIT",
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.1",
     "dotenv": "^16.0.0",
     "express": "^4.17.2",
     "express-jwt": "^6.1.0",
@@ -14,5 +15,12 @@
     "jsonwebtoken": "^8.5.1",
     "mysql2": "^2.3.3",
     "sequelize": "^6.16.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
   }
 }
