@@ -12,6 +12,12 @@ const controllerMatriculados = {
         console.log(nome)
         const matricular = res.json()
     },
+    atulizar(req, res){
+        const {id} = req.params
+        const {nome} = req.body
+        console.log(id)
+        res.json({ "messagem":nome, "id":id})
+    }
 
 }
 

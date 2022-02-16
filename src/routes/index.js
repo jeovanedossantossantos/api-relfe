@@ -1,7 +1,11 @@
 const express = require('express')
 const routes = express.Router();
-const controllerMatriculados = require('../controller/controllerMatriculados')
-
+const controllerMatriculados = require('../controller/controllerMatriculados');
+const controllerUsuarios = require("../controller/controllerUsuario");
+const auth = require('../middlewares/auth')
+const UsusriosCreateValidations = require("../validations/usuarios/create")
+const authLoginValidations = require("../validations/auth/login")
+const authController = require("../controller/authController")
 // const flash = require("connect-flash")
 // app.use(flash())
 
@@ -16,17 +20,18 @@ const controllerMatriculados = require('../controller/controllerMatriculados')
 //     next();
 // })
 
-// Busaca todos os matriculados no banco
-routes.get("/matriculados",controllerMatriculados.listaMatriculados)
-// Busca um matriculado expecifico
-routes.get("/matriculado/:id", controllerMatriculados.buscarUm)
-// Matricula
-routes.post("/matricular", controllerMatriculados.cadastra)
-// Atualiza os dados de um matriculado 
-routes.put("/atualizar/:id")
-//  Verifica o usuario
-routes.post("/usuarios")
+
+//  Cadastra usuario
+routes.post("/usuarios",controllerUsuarios.registro)
 // Faz o login no sistema
-routes.post("/login")
+routes.post("/login", authLoginValidations ,authController.login)
+// Buscando todos os matriculados no banco
+routes.get("/matriculados",auth,controllerMatriculados.listaMatriculados)
+// Busca um matriculado expecifico
+routes.get("/matriculado/:id",auth, controllerMatriculados.buscarUm)
+// Matricula
+routes.post("/matricular",auth, controllerMatriculados.cadastra)
+// Atualiza os dados de um matriculado 
+routes.put("/atualizar/:id",auth,controllerMatriculados.atulizar)
 
 module.exports = routes;
